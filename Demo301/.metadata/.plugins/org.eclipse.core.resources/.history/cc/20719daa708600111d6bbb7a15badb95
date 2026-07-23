@@ -1,0 +1,44 @@
+package com.example.demo.Services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.Entity.Employee;
+import com.example.demo.Repository.EmpRepository;
+
+@Service
+public class EmpService {
+
+    @Autowired
+    EmpRepository empRepo;
+
+    public List<Employee> getAllEmployees() {
+        return empRepo.findAll();
+    }
+
+    public Employee getEmployeeById(int id) {
+        return empRepo.findById(id).orElse(null);
+    }
+
+    public void insertEmployee(Employee e) {
+        empRepo.save(e);
+    }
+
+    public Employee updateEmployeeById(int id, Employee e) {
+        Employee emp = empRepo.findById(id).orElse(null);
+
+        if (emp != null) {
+            emp.setName(e.getName());
+            emp.setSalary(e.getSalary());
+            empRepo.save(emp);
+        }
+
+        return emp;
+    }
+
+    public void deleteEmployeeById(int id) {
+        empRepo.deleteById(id);
+    }
+}

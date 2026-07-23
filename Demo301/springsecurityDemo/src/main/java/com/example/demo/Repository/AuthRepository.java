@@ -1,0 +1,10 @@
+package com.example.demo.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.Entity.Users;
+
+public interface AuthRepository extends JpaRepository<Users, Integer> {
+
+    Users findByName(String name);
+
+}
